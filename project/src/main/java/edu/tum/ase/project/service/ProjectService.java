@@ -25,4 +25,8 @@ public class ProjectService {
     public List<Project> getProjects() {
         return projectRepository.findAll();
     }
+
+    public void delete(Project project) {
+        projectRepository.delete(project);
+    }
 }

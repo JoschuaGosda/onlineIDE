@@ -26,6 +26,14 @@ public class ProjectApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		// If you get the following error:
+		//
+		// ERROR: duplicate key value violates unique constraint "uk_1e447b96pedrvtxw44ot4qxem
+		// Detail: Key (name)=(my-project) already exists.
+		//
+		// uncomment this line of code to delete the project first.
+		// projectService.delete(projectService.findByName("my-project"));
+
 		log.info("DataSource = " + dataSource);
 		Project project = projectService.createProject(new Project("my-project"));
 		log.info("ID of saved project = " + project.getId());
