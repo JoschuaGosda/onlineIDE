@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: "dev"
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/my_db"
+    username: "admin"
+    password: "test"
+  jpa:
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.PostgreSQLDialect"  # Specifying the SQL dialect makes Hibernate generate better SQL for the chosen database
+        jdbc:
+          lob:
+            non_contextual_creation: true   # fixes Hibernate issue: https://github.com/spring-projects/spring-boot/issues/12007
+    hibernate:
+      ddl-auto: "update"
