@@ -1,4 +1,7 @@
+import {SourceFile} from "./sourceFile";
+
 export class Project {
-  id: number;
+  id: string;
   name: string;
+  sourceFileList: SourceFile[];
 }
