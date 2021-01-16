@@ -10,7 +10,7 @@ export class NewProjectDialogComponent implements OnInit {
   public newProjectName: string;
 
   // dialogRef: allows this component to close the dialog
-  constructor(public dialogRef: MatDialogRef<NewProjectDialogComponent>) { }
+  constructor(private dialogRef: MatDialogRef<NewProjectDialogComponent>) {}
 
   ngOnInit(): void {}
 

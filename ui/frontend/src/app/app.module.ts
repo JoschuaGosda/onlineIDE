@@ -19,11 +19,16 @@ import {ProjectListComponent} from './project-list/project-list.component';
 import {NewProjectDialogComponent} from './new-project-dialog/new-project-dialog.component';
 import {MonacoEditorModule} from "ngx-monaco-editor";
 import {EditorComponent} from './editor/editor.component';
+import { SourceFileListComponent } from './source-file-list/source-file-list.component';
+import { DeleteProjectDialogComponent } from './delete-project-dialog/delete-project-dialog.component';
+import { NewSourceFileDialogComponent } from './new-source-file-dialog/new-source-file-dialog.component';
+import { DeleteSourceFileDialogComponent } from './delete-source-file-dialog/delete-source-file-dialog.component';
+import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
 
 const routes: Route[] = [
   {path: 'projects', component: ProjectListComponent},
-  {path: 'editor', component: EditorComponent},
-  {path: '**', redirectTo: '/'}
+  {path: 'files', component: SourceFileListComponent},
+  {path: '**', redirectTo: '/projects'}
 ]
 
 @NgModule({
@@ -31,7 +36,12 @@ const routes: Route[] = [
     AppComponent,
     ProjectListComponent,
     EditorComponent,
-    NewProjectDialogComponent
+    NewProjectDialogComponent,
+    SourceFileListComponent,
+    DeleteProjectDialogComponent,
+    NewSourceFileDialogComponent,
+    DeleteSourceFileDialogComponent,
+    RenameDialogComponent
   ],
   imports: [
     BrowserModule,
