@@ -18,13 +18,13 @@ export class SourceFileListComponent implements OnInit {
   public project: Project;
   public sourceFiles: SourceFile[];
 
-  constructor(private httpsService: HttpService, private dialog: MatDialog,
+  constructor(private httpService: HttpService, private dialog: MatDialog,
               private router: Router) {
 
     // passed by ProjectListComponent via router.navigateByUrl
     this.project = this.router.getCurrentNavigation().extras.state.project;
 
-    this.httpsService.getAllSourceFilesOfProject(this.project.id).subscribe(
+    this.httpService.getAllSourceFilesOfProject(this.project.id).subscribe(
       response => {
         this.sourceFiles = response;
       },
@@ -101,8 +101,13 @@ export class SourceFileListComponent implements OnInit {
     );
   }
 
+  public navigateToEditor(sourceFile: SourceFile): void {
+    // state can be accessed by the editor
+    this.router.navigateByUrl('/editor', {state: { sourceFile: sourceFile }});
+  }
+
   private createSourceFile(newSourceFileName: string): void {
-    this.httpsService.createSourceFile(newSourceFileName, this.project).subscribe(
+    this.httpService.createSourceFile(newSourceFileName, this.project).subscribe(
       response => {
         this.sourceFiles.push(response);
       },
@@ -113,13 +118,13 @@ export class SourceFileListComponent implements OnInit {
   }
 
   private deleteSourceFile(deleteSourceFileId): void {
-    this.httpsService.deleteSourceFile(deleteSourceFileId).subscribe();
+    this.httpService.deleteSourceFile(deleteSourceFileId).subscribe();
     let indexToRemove = this.sourceFiles.indexOf(this.sourceFiles.find(f => f.id === deleteSourceFileId));
     this.sourceFiles.splice(indexToRemove, 1);
   }
 
   private renameSourceFile(sourceFileToRename: SourceFile, newSourceFileName: string): void {
-    this.httpsService.updateSourceFileName(sourceFileToRename.id, newSourceFileName).subscribe(
+    this.httpService.updateSourceFileName(sourceFileToRename.id, newSourceFileName).subscribe(
       response => {
         if (response.name && response.id) {
           let indexToRename = this.sourceFiles.indexOf(this.sourceFiles.find(f => f.id === sourceFileToRename.id));
