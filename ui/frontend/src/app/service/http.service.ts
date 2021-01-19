@@ -20,6 +20,8 @@ const updateSourceFileCodeUrl = 'update-source-file-code';
 
 const compileUrl = 'compile';
 
+const darkModeStatusUrl = 'dark-mode';
+
 /*
   Service for interacting with the backend REST API.
   To use it inside a component, pass an HttpService object as an argument to the component's constructor.
@@ -78,5 +80,9 @@ export class HttpService {
 
   compile(sourceCode: SourceCode): Observable<CompilationResult> {
     return this.http.post<CompilationResult>(compileUrl, sourceCode);
+  }
+
+  getIsCurrentlyDark(): Observable<boolean> {
+    return this.http.get<boolean>(darkModeStatusUrl);
   }
 }
