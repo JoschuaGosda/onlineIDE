@@ -3,8 +3,8 @@ import {HttpService} from "../service/http.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SourceFile} from "../sourceFile";
 import {Project} from "../project";
-import {NewSourceFileDialogComponent} from "../new-source-file-dialog/new-source-file-dialog.component";
-import {DeleteSourceFileDialogComponent} from "../delete-source-file-dialog/delete-source-file-dialog.component";
+import {NewDialogComponent} from "../new-dialog/new-dialog.component";
+import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
 import {Router} from "@angular/router";
 import {RenameDialogComponent} from "../rename-dialog/rename-dialog.component";
 
@@ -41,8 +41,11 @@ export class SourceFileListComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true; // disable closing by clicking next to dialog
     dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      typeName: 'File',
+    };
 
-    const dialogRef = this.dialog.open(NewSourceFileDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(NewDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       response => {
@@ -64,10 +67,11 @@ export class SourceFileListComponent implements OnInit {
     dialogConfig.autoFocus = true;
     // pass data to the dialog component
     dialogConfig.data = {
-      sourceFileToDeleteName: sourceFileToDelete.name
+      typeName: 'File',
+      itemToDeleteName: sourceFileToDelete.name
     };
 
-    const dialogRef = this.dialog.open(DeleteSourceFileDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       (response: boolean) => { // response === true if file should be deleted

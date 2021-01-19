@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Project} from "../project";
 import {HttpService} from "../service/http.service";
-import {NewProjectDialogComponent} from "../new-project-dialog/new-project-dialog.component";
+import {NewDialogComponent} from "../new-dialog/new-dialog.component";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {DeleteProjectDialogComponent} from "../delete-project-dialog/delete-project-dialog.component";
+import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
 import {Router} from "@angular/router";
 import {RenameDialogComponent} from "../rename-dialog/rename-dialog.component";
 
@@ -34,8 +34,12 @@ export class ProjectListComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true; // disable closing by clicking next to dialog
     dialogConfig.autoFocus = true;
+    // pass data to the dialog component
+    dialogConfig.data = {
+      typeName: 'Project'
+    };
 
-    const dialogRef = this.dialog.open(NewProjectDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(NewDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       response => {
@@ -53,10 +57,11 @@ export class ProjectListComponent implements OnInit {
     dialogConfig.autoFocus = true;
     // pass data to the dialog component
     dialogConfig.data = {
-      projectToDeleteName: projectToDelete.name
+      typeName: 'Project',
+      itemToDeleteName: projectToDelete.name
     };
 
-    const dialogRef = this.dialog.open(DeleteProjectDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
       (response: boolean) => { // response === true if project should be deleted

@@ -13,18 +13,16 @@ import {MatLineModule} from "@angular/material/core";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {MatCard, MatCardModule} from "@angular/material/card";
+import {MatCardModule} from "@angular/material/card";
 
 import {AppComponent} from './app.component';
 import {ProjectListComponent} from './project-list/project-list.component';
-import {NewProjectDialogComponent} from './new-project-dialog/new-project-dialog.component';
+import {NewDialogComponent} from './new-dialog/new-dialog.component';
 import {MonacoEditorModule} from "ngx-monaco-editor";
 import {EditorComponent} from './editor/editor.component';
-import { SourceFileListComponent } from './source-file-list/source-file-list.component';
-import { DeleteProjectDialogComponent } from './delete-project-dialog/delete-project-dialog.component';
-import { NewSourceFileDialogComponent } from './new-source-file-dialog/new-source-file-dialog.component';
-import { DeleteSourceFileDialogComponent } from './delete-source-file-dialog/delete-source-file-dialog.component';
-import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
+import {SourceFileListComponent} from './source-file-list/source-file-list.component';
+import {DeleteDialogComponent} from './delete-dialog/delete-dialog.component';
+import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
 
 const routes: Route[] = [
   {path: 'projects', component: ProjectListComponent},
@@ -38,11 +36,9 @@ const routes: Route[] = [
     AppComponent,
     ProjectListComponent,
     EditorComponent,
-    NewProjectDialogComponent,
+    NewDialogComponent,
     SourceFileListComponent,
-    DeleteProjectDialogComponent,
-    NewSourceFileDialogComponent,
-    DeleteSourceFileDialogComponent,
+    DeleteDialogComponent,
     RenameDialogComponent
   ],
   imports: [
