@@ -27,9 +27,6 @@ export class SourceFileListComponent implements OnInit {
     this.httpService.getAllSourceFilesOfProject(this.project.id).subscribe(
       response => {
         this.sourceFiles = response;
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -39,7 +36,7 @@ export class SourceFileListComponent implements OnInit {
   public createNewSourceFileViaDialog(): void {
     let newSourceFileName = '';
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; // disable closing by clicking next to dialog
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       typeName: 'File',
@@ -48,24 +45,20 @@ export class SourceFileListComponent implements OnInit {
     const dialogRef = this.dialog.open(NewDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
+      // response is empty if dialog was canceled
       response => {
-        // executed as soon as dialog is closed via any button
         newSourceFileName = response;
         if (newSourceFileName && newSourceFileName.length > 0) {
           this.createSourceFile(newSourceFileName);
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }
 
   public deleteSourceFileViaDialog(sourceFileToDelete: SourceFile): void {
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; // disable closing by clicking next to dialog
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    // pass data to the dialog component
     dialogConfig.data = {
       typeName: 'File',
       itemToDeleteName: sourceFileToDelete.name
@@ -74,7 +67,8 @@ export class SourceFileListComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      (response: boolean) => { // response === true if file should be deleted
+      // response === true if file should be deleted
+      (response: boolean) => {
         if (response) {
           this.deleteSourceFile(sourceFileToDelete.id);
         }
@@ -84,9 +78,8 @@ export class SourceFileListComponent implements OnInit {
 
   public renameSourceFileViaDialog(sourceFileToRename: SourceFile): void {
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; // disable closing by clicking next to dialog
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    // pass data to the dialog component
     dialogConfig.data = {
       oldName: sourceFileToRename.name
     };
@@ -94,13 +87,11 @@ export class SourceFileListComponent implements OnInit {
     const dialogRef = this.dialog.open(RenameDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
+      // response is empty if dialog was canceled
       (response: string) => {
-        if (response && response.length > 0) {// string not empty -> should be renamed
+        if (response && response.length > 0) {
           this.renameSourceFile(sourceFileToRename, response);
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -114,9 +105,6 @@ export class SourceFileListComponent implements OnInit {
     this.httpService.createSourceFile(newSourceFileName, this.project).subscribe(
       response => {
         this.sourceFiles.push(response);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -135,9 +123,6 @@ export class SourceFileListComponent implements OnInit {
           this.sourceFiles[indexToRename].name = response.name;
           this.sourceFiles[indexToRename].id = response.id;
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }

@@ -17,12 +17,10 @@ export class ProjectListComponent implements OnInit {
 
   constructor(private httpService: HttpService, private dialog: MatDialog,
               private router: Router) {
+
     this.httpService.getAllProjects().subscribe(
       response => {
         this.projects = response;
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -30,32 +28,29 @@ export class ProjectListComponent implements OnInit {
   ngOnInit(): void {}
 
   public createNewProjectViaDialog(): void {
-    let newProjectName = '';
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true; // disable closing by clicking next to dialog
     dialogConfig.autoFocus = true;
-    // pass data to the dialog component
-    dialogConfig.data = {
+    dialogConfig.data = { // data is passed to the dialog component with dialog.open below
       typeName: 'Project'
     };
 
     const dialogRef = this.dialog.open(NewDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
+      // response is empty if dialog was canceled
       response => {
-        // executed as soon as dialog is closed via any button
-        newProjectName = response;
-        if (newProjectName && newProjectName.length > 0) {
-          this.createProject(newProjectName);
+        if (response && response.length > 0) {
+          this.createProject(response);
         }
-      });
+      }
+    );
   }
 
   public deleteProjectViaDialog(projectToDelete: Project): void {
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; // disable closing by clicking next to dialog
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    // pass data to the dialog component
     dialogConfig.data = {
       typeName: 'Project',
       itemToDeleteName: projectToDelete.name
@@ -64,7 +59,8 @@ export class ProjectListComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      (response: boolean) => { // response === true if project should be deleted
+      // response === true if project should be deleted
+      (response: boolean) => {
         if (response) {
           this.deleteProject(projectToDelete.id);
         }
@@ -74,9 +70,8 @@ export class ProjectListComponent implements OnInit {
 
   public renameProjectViaDialog(projectToRename: Project): void {
     let dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; // disable closing by clicking next to dialog
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    // pass data to the dialog component
     dialogConfig.data = {
       oldName: projectToRename.name
     };
@@ -84,13 +79,11 @@ export class ProjectListComponent implements OnInit {
     const dialogRef = this.dialog.open(RenameDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
+      // response is empty if dialog was canceled
       (response: string) => {
-        if (response && response.length > 0) { // string not empty -> should be renamed
+        if (response && response.length > 0) {
           this.renameProject(projectToRename, response);
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -104,9 +97,6 @@ export class ProjectListComponent implements OnInit {
     this.httpService.createProject(newProjectName).subscribe(
       response => {
         this.projects.push(response);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -125,10 +115,7 @@ export class ProjectListComponent implements OnInit {
           this.projects[indexToRename].name = response.name;
           this.projects[indexToRename].id = response.id;
         }
-      },
-      error => {
-        console.log(error);
       }
-    )
+    );
   }
 }

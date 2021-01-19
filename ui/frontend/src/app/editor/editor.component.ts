@@ -56,10 +56,19 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   private updateLanguage(): void {
     let fileExtension = this.sourceFile.name.split('.').pop().toLocaleLowerCase();
-    // creating new editorOptions is necessary to make the editor update the theme
-    this.editorOptions = {theme: this.editorOptions.theme, language: fileExtension};
+    let editorLanguage = 'c';
+    if (fileExtension === 'c') {
+      editorLanguage = 'c';
+    }
+    else if (fileExtension === 'java') {
+      editorLanguage = 'java';
+    }
+    else if (fileExtension === 'js') {
+      editorLanguage = 'javascript';
+    }
 
-    console.log(this.sourceFile.name);
+    // creating new editorOptions is necessary to make the editor update the theme
+    this.editorOptions = {theme: this.editorOptions.theme, language: editorLanguage};
   }
 
   private updateTheme() {
