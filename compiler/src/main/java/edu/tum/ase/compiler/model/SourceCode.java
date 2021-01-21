@@ -5,8 +5,14 @@ public class SourceCode {
     private String fileName;
 
 
-    public SourceCode(){
-
+    public SourceCode() {
+    	code = "";
+    	fileName = "";
+    }
+    
+    public SourceCode(String code, String fileName) {
+    	this.code = code;
+    	this.fileName = fileName;
     }
 
     public String getCode() {

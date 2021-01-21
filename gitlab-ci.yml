@@ -1,0 +1,20 @@
+image: maven:3.3.9-jdk-11
+stages:
+    - build
+    - test
+    - package
+
+build:
+    stage: build
+    script:
+        - 'mvn compile'
+    
+test:
+    stage: test
+    script:
+        - 'mvn test'
+    
+package:
+    stage: package
+    script:
+        - 'mvn package'
