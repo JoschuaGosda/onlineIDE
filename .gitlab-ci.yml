@@ -1,8 +1,14 @@
-image: maven:3.3.9-jdk-11
+image: maven:3.6.3-jdk-11
 stages:
     - build
     - test
     - package
+
+default:
+  before_script:
+    - cd compiler
+    - apt-get -yq update
+    - apt-get -yq install gcc
 
 build:
     stage: build
