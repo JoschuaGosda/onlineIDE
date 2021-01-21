@@ -46,6 +46,13 @@ public class OperatingSystemService {
 	
 	public ProcessResult execute(String command) throws IOException {
 		Process process = Runtime.getRuntime().exec(command);
+		while(true) {
+			try {
+				process.waitFor();
+				break;
+			} catch (InterruptedException e) {}
+		}
+		
 		return new ProcessResult(
 				IOUtils.toString(process.getInputStream(), Charset.defaultCharset()), 
 				IOUtils.toString(process.getErrorStream(), Charset.defaultCharset()), 
