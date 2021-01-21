@@ -4,6 +4,10 @@ stages:
     - test
     - package
 
+default:
+  before_script:
+    - cd compiler
+
 build:
     stage: build
     script:
