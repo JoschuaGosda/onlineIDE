@@ -45,7 +45,7 @@ public class CompilerService {
         
         // Compile
         String compilerName = EXTENSION_TO_COMPILER_NAME.get(sourceCodeExtension);
-        ProcessResult result = osService.execute(compilerName + " \"" + compilationDirectoryName + "/" + fileName + "\"");
+        ProcessResult result = osService.execute(compilerName + " " + compilationDirectoryName + "/" + fileName);
 
         // Extract compilation results
         CompilationResult compilationResult = new CompilationResult();
