@@ -5,7 +5,12 @@ public class CompilationResult {
     private String stderr;
     private boolean compilable = false;
 
-    public CompilationResult() {
+    public CompilationResult() {}
+    
+    public CompilationResult(String stdout, String stderr, boolean compilable) {
+    	this.stdout = stdout;
+    	this.stderr = stderr;
+    	this.compilable = compilable;
     }
 
     public String getStdout() {
@@ -30,5 +35,16 @@ public class CompilationResult {
 
     public void setCompilable(boolean compilable) {
         this.compilable = compilable;
+    }
+    
+    @Override
+	public boolean equals(Object other) {
+    	if(other.getClass() != this.getClass()) 
+    		return false;
+    	
+    	CompilationResult otherCasted = (CompilationResult) other;
+    	return otherCasted.compilable == this.compilable &&
+    			otherCasted.stdout == this.stdout &&
+    			otherCasted.stderr == this.stderr;
     }
 }
