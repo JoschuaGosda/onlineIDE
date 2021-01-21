@@ -1,6 +1,7 @@
 package edu.tum.ase.project.service;
 
 import edu.tum.ase.project.model.Project;
+import edu.tum.ase.project.model.SourceFile;
 import edu.tum.ase.project.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,15 +19,26 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public Project findByName(String name) {
-        return projectRepository.findByName(name);
+    public Project findById(String projectId) {
+        return projectRepository
+                .findById(projectId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
     }
 
     public List<Project> getProjects() {
         return projectRepository.findAll();
     }
 
-    public void delete(Project project) {
+    public void deleteProject(Project project) {
         projectRepository.delete(project);
+    }
+
+    public Project updateProjectName(String projectId, String name) {
+        Project project = projectRepository
+                .findById(projectId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
+        project.setName(name);
+        projectRepository.save(project);
+        return project;
     }
 }
