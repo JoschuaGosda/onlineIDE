@@ -39,6 +39,5 @@ public class OperatingSystemServiceTests {
 		
 		// then
 		then(result.exitCode).isEqualTo(0);
-		then(result.stderr).isEqualTo("");
 	}
 }
