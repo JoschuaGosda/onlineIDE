@@ -98,7 +98,7 @@ export class SourceFileListComponent implements OnInit {
 
   public navigateToEditor(sourceFile: SourceFile): void {
     // state can be accessed by the editor
-    this.router.navigateByUrl('/editor', {state: { sourceFile: sourceFile }});
+    this.router.navigateByUrl('/ui/editor', {state: { sourceFile: sourceFile }});
   }
 
   private createSourceFile(newSourceFileName: string): void {

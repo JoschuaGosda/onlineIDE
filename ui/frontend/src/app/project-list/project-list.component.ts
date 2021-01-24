@@ -90,7 +90,7 @@ export class ProjectListComponent implements OnInit {
 
   public navigateToSourceFileList(project: Project): void {
     // state can be accessed by the SourceFileListComponent
-    this.router.navigateByUrl('/files', {state: { project: project }});
+    this.router.navigateByUrl('/ui/files', {state: { project: project }});
   }
 
   private createProject(newProjectName: string): void {

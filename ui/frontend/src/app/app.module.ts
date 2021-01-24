@@ -26,10 +26,10 @@ import {DeleteDialogComponent} from './delete-dialog/delete-dialog.component';
 import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
 
 const routes: Route[] = [
-  {path: 'projects', component: ProjectListComponent},
-  {path: 'files', component: SourceFileListComponent},
-  {path: 'editor', component: EditorComponent},
-  {path: '**', redirectTo: '/projects'}
+  {path: 'ui/projects', component: ProjectListComponent},
+  {path: 'ui/files', component: SourceFileListComponent},
+  {path: 'ui/editor', component: EditorComponent},
+  {path: '**', redirectTo: '/ui/projects'}
 ]
 
 @NgModule({
