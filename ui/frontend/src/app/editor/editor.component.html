@@ -7,12 +7,12 @@
   </button>
 </div>
 
-<div style="height: 500px">
+<div class="editor">
   <ngx-monaco-editor style="height: 100%"
                      [options]="editorOptions" [(ngModel)]="sourceFile.sourceCode"></ngx-monaco-editor>
 </div>
 
-<div>
+<div class="output">
   <mat-card>
     <mat-card-title>Output</mat-card-title>
     <mat-card-content>

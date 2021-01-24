@@ -14,6 +14,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 import {AppComponent} from './app.component';
 import {ProjectListComponent} from './project-list/project-list.component';
@@ -57,6 +58,7 @@ const routes: Route[] = [
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

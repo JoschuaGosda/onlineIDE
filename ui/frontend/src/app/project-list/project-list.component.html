@@ -1,4 +1,4 @@
-<div>
+<div class="project-list">
   <mat-list>
     <h2>Projects</h2>
     <!-- *ngFor... creates and dynamically updates a list entry for every projects element -->
@@ -17,10 +17,10 @@
       <mat-divider *ngIf="!last"></mat-divider> <!-- horizontal line after all rows except last one -->
     </mat-list-item>
   </mat-list>
-</div>
 
-<div>
-  <button mat-fab color="primary" (click)="createNewProjectViaDialog()">
-    <mat-icon>add</mat-icon>
-  </button>
+  <div class="new-project-button">
+    <button mat-fab color="primary" (click)="createNewProjectViaDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>
