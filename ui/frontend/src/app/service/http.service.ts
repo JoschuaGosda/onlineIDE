@@ -18,6 +18,9 @@ const deleteSourceFileUrl = 'delete-source-file';
 const updateSourceFileNameUrl = 'update-source-file-name';
 const updateSourceFileCodeUrl = 'update-source-file-code';
 
+
+const authUrl = 'api-gateway';
+
 const compileUrl = 'compile';
 
 const darkModeStatusUrl = 'dark-mode';
@@ -85,4 +88,9 @@ export class HttpService {
   getIsCurrentlyDark(): Observable<boolean> {
     return this.http.get<boolean>(darkModeStatusUrl);
   }
+
+  checkAuthentication(): Observable<boolean>{
+    return this.http.get<boolean>(authUrl);
+  }
+
 }
