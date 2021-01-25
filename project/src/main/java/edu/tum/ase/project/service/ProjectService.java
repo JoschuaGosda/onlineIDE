@@ -17,6 +17,8 @@ import java.util.List;
 @Service
 public class ProjectService {
 
+    //TODO: Implement methods to add users to a specific project, make it possible that only allowed users can see project
+
     @Autowired
     private ProjectRepository projectRepository;
 

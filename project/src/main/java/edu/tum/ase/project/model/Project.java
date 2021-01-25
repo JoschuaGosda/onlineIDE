@@ -8,7 +8,9 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name = "projects")
@@ -26,6 +28,12 @@ public class Project implements Serializable {
     @JsonIgnore
     @OnDelete(action= OnDeleteAction.CASCADE)
     private List<SourceFile> sourceFileList;
+
+    //extend the project model to also contain users id that can access the project
+    @ElementCollection
+    @CollectionTable(name= "project_project_users", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "userIds")
+    private Set<String> userIds = new HashSet<>();
 
     public Project() {
     }

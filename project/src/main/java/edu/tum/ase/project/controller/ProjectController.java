@@ -4,8 +4,13 @@ import edu.tum.ase.project.model.Project;
 import edu.tum.ase.project.model.SourceFile;
 import edu.tum.ase.project.service.ProjectService;
 import edu.tum.ase.project.service.SourceFileService;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -14,13 +19,37 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
+
     @Autowired
     private SourceFileService sourceFileService;
 
-    @GetMapping("/")
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    //TODO: fill in the correct URL?
+    private final String BACKEND_BASE_URL = "http://backend-service/project/";
+
+    @GetMapping("/")    //introduced in Exercise 12 -> check for all, also shared projects
+    public String index(Model model) {
+        // try to obtain all IP addresses of deployed backend-services
+
+        List<ServiceInstance> serviceInstanceList = discoveryClient.getInstances("backend-service");
+        serviceInstanceList.forEach((ServiceInstance instanceInfo) -> {
+            System.out.println(ToStringBuilder.reflectionToString(instanceInfo));
+        });
+
+        model.addAttribute("projects", restTemplate.getForObject(BACKEND_BASE_URL, Project[].class));
+        return "index";
+    }
+
+    // Before Exercise 12
+    /*@GetMapping("/")
     public List<Project> index() {
         return projectService.getProjects();
-    }
+    }*/
 
     @PostMapping(path = "/create-project")
     public Project create_project (@RequestBody Project project) {
