@@ -1,8 +1,7 @@
-package edu.tum.ase.springangularoauth2;
+package edu.tum.ase.apigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,16 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@EnableEurekaClient
+@EnableZuulProxy
 @RestController
-public class SpringAngularOauth2Application {
+public class ApiGatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringAngularOauth2Application.class, args);
+        SpringApplication.run(ApiGatewayApplication.class, args);
     }
 
     @GetMapping("/api/project")

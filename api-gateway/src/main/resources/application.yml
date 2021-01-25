@@ -13,3 +13,35 @@ security:
         - api
     resource:
       userInfoUri: https://gitlab.lrz.de/api/v4/user
+
+
+spring:
+  application:
+    name: gateway-service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+server:
+  port: ${PORT:8000}
+zuul.host.socket-timeout-millis: 20000
+zuul.host.connect-timeout-millis: 20000
+ribbon.ConnectTimeout: 10000
+ribbon.ReadTimeout: 10000
+zuul:
+  # disabling automatic adding of services into Zuul by setting ignored-services to *
+  # https://cloud.spring.io/spring-cloud-netflix/multi/multi_router_and_filter_zuul.html#netflix-zuul-reverse-proxy
+  ignored-services: "*"
+  routes:
+    project-service:
+      path: "/project/**"
+      service-id: backend-service
+      strip-prefix: false
+    ui-service:
+      path: "/ui/**"
+      service-id: frontend-service
+      strip-prefis: false
+    compiler-service:
+      path: #
+      service-id: #
+      trip-prefis: #

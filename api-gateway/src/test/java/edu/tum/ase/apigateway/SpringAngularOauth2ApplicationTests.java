@@ -1,4 +1,4 @@
-package edu.tum.ase.springangularoauth2;
+package edu.tum.ase.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

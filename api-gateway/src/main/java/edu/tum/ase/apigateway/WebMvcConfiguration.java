@@ -1,4 +1,4 @@
-package edu.tum.ase.springangularoauth2;
+package edu.tum.ase.apigateway;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;

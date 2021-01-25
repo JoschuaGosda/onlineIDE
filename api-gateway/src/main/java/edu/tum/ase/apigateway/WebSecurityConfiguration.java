@@ -1,4 +1,4 @@
-package edu.tum.ase.springangularoauth2;
+package edu.tum.ase.apigateway;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Configuration;

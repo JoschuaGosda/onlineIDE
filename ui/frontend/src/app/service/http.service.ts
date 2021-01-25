@@ -89,6 +89,7 @@ export class HttpService {
     return this.http.get<boolean>(darkModeStatusUrl);
   }
 
+
   checkAuthentication(): Observable<boolean>{
     return this.http.get<boolean>(authUrl);
   }

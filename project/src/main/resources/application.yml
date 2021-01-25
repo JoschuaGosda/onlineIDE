@@ -14,5 +14,18 @@ spring:
             non_contextual_creation: true   # fixes Hibernate issue: https://github.com/spring-projects/spring-boot/issues/12007
     hibernate:
       ddl-auto: "update"
+#server:
+#  port: 8091
+
+
+  application:
+    name: project-service
 server:
-  port: 8091
+  port: ${PORT:8080}
+  # needs to be added as zuul is set up and requires to have frontend-service to have /ui URL
+  servlet:
+    context-path: /project
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
