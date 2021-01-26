@@ -50,7 +50,6 @@ public class ProjectService {
         projectRepository.save(project);
         return project;
     }
-
     // add Bean to support searching for users by the GitLab Api
     @Bean
     public OAuth2RestOperations restTemplate (OAuth2ClientContext context) {

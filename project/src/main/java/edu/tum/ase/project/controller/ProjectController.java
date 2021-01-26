@@ -23,19 +23,23 @@ public class ProjectController {
     @Autowired
     private SourceFileService sourceFileService;
 
+    /*
     @Autowired
     private RestTemplate restTemplate;
+     */
 
     @Autowired
     private DiscoveryClient discoveryClient;
 
-    //TODO: fill in the correct URL?
-    private final String BACKEND_BASE_URL = "http://backend-service/project/";
+    //This is the adress of the api gateway -> server side service discovery, in the frontend just /projects is enough
+    private final String BACKEND_BASE_URL = "http://localhost:8000/project/";
 
+    /*
     @GetMapping("/")    //introduced in Exercise 12 -> check for all, also shared projects
     public String index(Model model) {
         // try to obtain all IP addresses of deployed backend-services
 
+        //TODO: The following has to be adapted to fit to the online IDE, also backend-service should be replaced by some project tag?
         List<ServiceInstance> serviceInstanceList = discoveryClient.getInstances("backend-service");
         serviceInstanceList.forEach((ServiceInstance instanceInfo) -> {
             System.out.println(ToStringBuilder.reflectionToString(instanceInfo));
@@ -44,12 +48,14 @@ public class ProjectController {
         model.addAttribute("projects", restTemplate.getForObject(BACKEND_BASE_URL, Project[].class));
         return "index";
     }
+    */
+
 
     // Before Exercise 12
-    /*@GetMapping("/")
+    @GetMapping("/")
     public List<Project> index() {
         return projectService.getProjects();
-    }*/
+    }
 
     @PostMapping(path = "/create-project")
     public Project create_project (@RequestBody Project project) {

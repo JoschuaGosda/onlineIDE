@@ -1,11 +1,11 @@
 spring:
   application:
-    name: compiler-service
+    name: ui-service
 server:
-  port: ${PORT:8090}
+  port: ${PORT:8080}
   # needs to be added as zuul is set up and requires to have frontend-service to have /ui URL
   servlet:
-    context-path: /compiler
+    context-path: /ui
 eureka:
   client:
     serviceUrl:
