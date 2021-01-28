@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ui-service
+    name: frontend-service
 server:
   port: ${PORT:8080}
   # needs to be added as zuul is set up and requires to have frontend-service to have /ui URL

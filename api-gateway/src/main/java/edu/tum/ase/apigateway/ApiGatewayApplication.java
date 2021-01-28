@@ -16,32 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@EnableEurekaClient
 @EnableZuulProxy
+@EnableEurekaClient
 @RestController
 public class ApiGatewayApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ApiGatewayApplication.class, args);
-    }
-
-    @GetMapping("/api/project")
-    public List<Project> getProjects() {
-        List<Project> projects = new ArrayList<>();
-        projects.add(new Project(1, "Learning C"));
-        projects.add(new Project(2, "ASE Project"));
-        projects.add(new Project(3, "My favorite language Java"));
-        return projects;
-    }
-
-    private static class Project {
-        public int id;
-        public String name;
-
-        Project(int id, String name) {
-            this.id = id;
-            this.name = name;
-        }
     }
 
     @GetMapping("/authenticated")

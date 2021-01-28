@@ -35,6 +35,14 @@ public class Project implements Serializable {
     @Column(name = "userIds")
     private Set<String> userIds = new HashSet<>();
 
+    public Set<String> getUserIds() {
+        return userIds;
+    }
+
+    public void setUserIds(Set<String> userIds) {
+        this.userIds = userIds;
+    }
+
     public Project() {
     }
 

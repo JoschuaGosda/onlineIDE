@@ -14,15 +14,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
-@EnableResourceServer //this is needed to make the tokens available
+@EnableResourceServer //this make the SecurityContext available of the Gateway, together with Bean OAuth2RestTemplate one can access the GitLab Api
 public class ProjectService {
-
-    //TODO: Implement methods to add users to a specific project, make it possible that only allowed users can see project
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    /*@Autowired
+    private OAuth2RestOperations restTemplate;*/
 
     public Project createProject(Project project) {
         return projectRepository.save(project);
@@ -50,10 +52,17 @@ public class ProjectService {
         projectRepository.save(project);
         return project;
     }
-    // add Bean to support searching for users by the GitLab Api
-    @Bean
-    public OAuth2RestOperations restTemplate (OAuth2ClientContext context) {
-        ClientCredentialsResourceDetails details = new ClientCredentialsResourceDetails();
-        return new OAuth2RestTemplate(details, context);
+
+    //add a user to the project
+    public Project shareProject(String projectId, Set<String> userIds) {
+        Project project = projectRepository
+                .findById(projectId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
+        // TODO: check against the gitlab api and only set user if he exists
+        //restTemplate.getForObject(...);
+        project.setUserIds(userIds);
+        projectRepository.save(project);
+        return project;
     }
+
 }

@@ -17,5 +17,10 @@ public class ProjectApplication{
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectApplication.class, args);
 	}
-}
 
+	@Bean
+	public OAuth2RestOperations restTemplate(OAuth2ClientContext context) {
+		ClientCredentialsResourceDetails details = new ClientCredentialsResourceDetails();
+		return new OAuth2RestTemplate(details, context);
+	}
+}
