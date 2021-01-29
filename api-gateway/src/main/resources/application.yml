@@ -41,7 +41,7 @@ zuul:
     frontend-service:
       path: "/ui/**"
       service-id: frontend-service
-      strip-prefis: false
+      strip-prefix: false
 #    compiler-service:
 #      path: #
 #      service-id: #
