@@ -32,8 +32,8 @@ export class AuthService {
     }
 
   public login(): void {
-    window.location.href = 'http://localhost:8080/login'//'${window.location.origin}${LOGIN_PATH}'; //handled by backend
-    //window.location.href = '/login'; //handled by backend
+    //window.location.href = 'http://localhost:8080/login'//'${window.location.origin}${LOGIN_PATH}'; //handled by backend
+    window.location.href = '/login'; //handled by backend
     }
 
   public logout(): void {

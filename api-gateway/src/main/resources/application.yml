@@ -42,10 +42,14 @@ zuul:
       path: "/ui/**"
       service-id: frontend-service
       strip-prefix: false
-#    compiler-service:
-#      path: #
-#      service-id: #
-#      trip-prefis: #
+    compiler-service:
+      path: "/compiler/**"
+      service-id: compiler-service
+      strip-prefix: false
+      darkmode-service:
+        path: "/darkmode/**"
+        service-id: darkmode-service
+        strip-prefix: false
 
 proxy:
   auth:
