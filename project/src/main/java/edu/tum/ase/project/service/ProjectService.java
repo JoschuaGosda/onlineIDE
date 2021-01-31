@@ -4,10 +4,10 @@ import edu.tum.ase.project.model.Project;
 import edu.tum.ase.project.model.SourceFile;
 import edu.tum.ase.project.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -49,13 +49,16 @@ public class ProjectService {
     }
 
     //add a user to the project
-    public Project shareProject(String projectId, Set<String> userIds) {
+    private final String endpoint = "https://gitlab.com/api/v4/users/?username=";
+
+    //public Project shareProject(String projectId, Set<String> userIds) {
+    public Project shareProject(String projectId, String userId) {
         Project project = projectRepository
                 .findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
         // TODO: check against the gitlab api and only set user if he exists
-        //restTemplate.getForObject(...);
-        project.setUserIds(userIds);
+        //replace the following by //project.setUserIds(restTemplate.getForObject(endpoint + "userId", Project[].class));
+        project.setUserIds(Collections.singleton(userId));
         projectRepository.save(project);
         return project;
     }
