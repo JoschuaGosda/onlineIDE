@@ -1,15 +1,3 @@
-#security:
-#  oauth2:
-#    client:
-#      clientId: 46b9fb266f5bcd1983b13ca58efc4828ec10840baa187897e795f8ab8bb40309
-#      clientSecret: 1289528e1cce42d837ee7e43f164ec9a528db41a6731cee0e35bdc7e64071f91
-#      accessTokenUri: https://gitlab.lrz.de/oauth/token
-#      userAuthorizationUri: https://gitlab.lrz.de/oauth/authorize
-#      scope:
-#        - read_user
-#        - api
-#    resource:
-#      userInfoUri: https://gitlab.lrz.de/api/v4/user
 
 spring:
   profiles:

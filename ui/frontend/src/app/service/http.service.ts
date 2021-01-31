@@ -6,24 +6,22 @@ import {SourceFile} from "../sourceFile";
 import {CompilationResult} from "../compilationResult";
 import {SourceCode} from "../sourceCode";
 
-const allProjectsUrl = 'all-projects';
-const createProjectUrl = 'create-project';
-const deleteProjectUrl = 'delete-project';
-const allSourceFilesOfProjectUrl = 'read-project';
-const updateProjectNameUrl = 'update-project-name';
+const allProjectsUrl = 'project';
+const createProjectUrl = 'project/create-project';
+const deleteProjectUrl = 'project/delete-project';
+const allSourceFilesOfProjectUrl = 'project/read-project';
+const updateProjectNameUrl = 'project/update-project-name';
 
-const allSourceFilesUrl = 'all-source-files';
-const createSourceFileUrl = 'create-source-file';
-const deleteSourceFileUrl = 'delete-source-file';
-const updateSourceFileNameUrl = 'update-source-file-name';
-const updateSourceFileCodeUrl = 'update-source-file-code';
+const allSourceFilesUrl = 'project/all-source-files';
+const createSourceFileUrl = 'project/create-source-file';
+const deleteSourceFileUrl = 'project/delete-source-file';
+const updateSourceFileNameUrl = 'project/update-source-file-name';
+const updateSourceFileCodeUrl = 'project/update-source-file-code';
 
 
-const authUrl = 'api-gateway';
+const compileUrl = 'compiler/compile';
 
-const compileUrl = 'compile';
-
-const darkModeStatusUrl = 'dark-mode';
+const darkModeStatusUrl = 'darkmode/dark-mode';
 
 /*
   Service for interacting with the backend REST API.
@@ -90,8 +88,5 @@ export class HttpService {
   }
 
 
-  checkAuthentication(): Observable<boolean>{
-    return this.http.get<boolean>(authUrl);
-  }
 
 }

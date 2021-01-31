@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableOAuth2Sso
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,7 +29,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
             .authorizeRequests()
             .antMatchers("/authenticated").permitAll()
-            .antMatchers("/api/**").authenticated();
+            .antMatchers("/project/**").authenticated();
     }
 
 }

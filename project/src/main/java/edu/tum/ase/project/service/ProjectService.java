@@ -4,12 +4,6 @@ import edu.tum.ase.project.model.Project;
 import edu.tum.ase.project.model.SourceFile;
 import edu.tum.ase.project.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.OAuth2RestOperations;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
-import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-@EnableResourceServer //this make the SecurityContext available of the Gateway, together with Bean OAuth2RestTemplate one can access the GitLab Api
+//@EnableResourceServer //this make the SecurityContext available of the Gateway, together with Bean OAuth2RestTemplate one can access the GitLab Api
 public class ProjectService {
 
     @Autowired

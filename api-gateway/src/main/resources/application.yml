@@ -33,14 +33,14 @@ zuul:
   # https://cloud.spring.io/spring-cloud-netflix/multi/multi_router_and_filter_zuul.html#netflix-zuul-reverse-proxy
   ignored-services: "*"
   routes:
-    backend-service:
+    project-service:
       path: "/project/**"
-      service-id: backend-service
+      service-id: project-service
       strip-prefix: false
       sensitiveHeaders: Cookie, Set-Cookie #Authentication - sensitive headers for accessing gitlab api are handed over
-    frontend-service:
+    ui-service:
       path: "/ui/**"
-      service-id: frontend-service
+      service-id: ui-service
       strip-prefix: false
     compiler-service:
       path: "/compiler/**"
