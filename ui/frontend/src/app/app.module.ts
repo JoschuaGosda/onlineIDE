@@ -24,6 +24,7 @@ import {EditorComponent} from './editor/editor.component';
 import {SourceFileListComponent} from './source-file-list/source-file-list.component';
 import {DeleteDialogComponent} from './delete-dialog/delete-dialog.component';
 import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
+import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 
 const routes: Route[] = [
   {path: 'ui/projects', component: ProjectListComponent},
@@ -40,7 +41,8 @@ const routes: Route[] = [
     NewDialogComponent,
     SourceFileListComponent,
     DeleteDialogComponent,
-    RenameDialogComponent
+    RenameDialogComponent,
+    ShareDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -126,4 +126,8 @@ export class SourceFileListComponent implements OnInit {
       }
     );
   }
+
+  /*private shareViaDialog() {
+
+  }*/
 }

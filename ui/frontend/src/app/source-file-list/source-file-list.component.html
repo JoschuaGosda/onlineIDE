@@ -1,6 +1,12 @@
 <div class="source-file-list">
   <mat-list>
     <h2>{{project.name}}</h2>
+
+    <button mat-raised-button>
+<!--            (click)="shareViaDialog()"-->
+    Share
+    </button>
+
     <!-- *ngFor... creates and dynamically updates a list entry for every sourceFiles element -->
     <mat-list-item *ngFor="let sourceFile of sourceFiles; last as last">
       <mat-icon mat-list-icon color="primary">description</mat-icon>
