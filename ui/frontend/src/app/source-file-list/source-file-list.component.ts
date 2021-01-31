@@ -7,6 +7,7 @@ import {NewDialogComponent} from "../new-dialog/new-dialog.component";
 import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
 import {Router} from "@angular/router";
 import {RenameDialogComponent} from "../rename-dialog/rename-dialog.component";
+import {ShareDialogComponent} from "../share-dialog/share-dialog.component";
 
 @Component({
   selector: 'app-source-file-list',
@@ -96,6 +97,25 @@ export class SourceFileListComponent implements OnInit {
     );
   }
 
+  public shareProjectViaDialog(projectName: string): void {
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+        projectName: projectName
+    };
+    const dialogRef = this.dialog.open(ShareDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      // response is empty if dialog was canceled
+      (response: string) => {
+        if (response && response.length > 0) {
+          this.shareProject(//sourceFileId...
+            response);
+        }
+      }
+    );
+  }
+
   public navigateToEditor(sourceFile: SourceFile): void {
     // state can be accessed by the editor
     this.router.navigateByUrl('/ui/editor', {state: { sourceFile: sourceFile }});
@@ -127,7 +147,13 @@ export class SourceFileListComponent implements OnInit {
     );
   }
 
-  /*private shareViaDialog() {
+  //sourceFileId also as parameter?
+  private shareProject(User: string) {
+    this.httpService.shareProject(User).subscribe(
+      response => {
+        //
+      }
+    );
 
-  }*/
+  }
 }

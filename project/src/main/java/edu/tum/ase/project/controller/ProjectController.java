@@ -47,7 +47,7 @@ public class ProjectController {
     }
     
     //added to include userIds that project is shared with
-    @PostMapping("/share-project-with-user/{id}")
+    @PostMapping("/share-project/{id}")
     public Project shareProject (@PathVariable("id") String sourceFileId, @RequestBody String userId){
         return projectService.shareProject(sourceFileId, userId);
     }

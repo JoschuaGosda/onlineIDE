@@ -18,6 +18,8 @@ const deleteSourceFileUrl = 'project/delete-source-file';
 const updateSourceFileNameUrl = 'project/update-source-file-name';
 const updateSourceFileCodeUrl = 'project/update-source-file-code';
 
+const shareProjectUrl = 'project/share-project';
+
 
 const compileUrl = 'compiler/compile';
 
@@ -87,6 +89,14 @@ export class HttpService {
     return this.http.get<boolean>(darkModeStatusUrl);
   }
 
+  /*shareProject(sourceFileId: string, User: string): Observable<SourceFile> {
+     return this.http.post<SourceFile>(shareProjectUrl + '/' + sourceFileId, User);
+  }*/
+
+  //this is wrong but compilable, obviously sourceFileId or a projectId is needed as parameter in the Url and the user in the body --> something like above
+  shareProject(User: string): Observable<void> {
+    return this.http.post<void>(shareProjectUrl, User);
+  }
 
 
 }

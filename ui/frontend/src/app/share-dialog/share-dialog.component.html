@@ -1,1 +1,10 @@
-<p>share-dialog works!</p>
+<h1 mat-dialog-title>Share Project '{{projectName}}'</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="newUser">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="onCancel()">Cancel</button>
+  <button mat-stroked-button (click)="onOk()">Share</button>
+</div>
