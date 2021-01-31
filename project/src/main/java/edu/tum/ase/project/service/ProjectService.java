@@ -4,6 +4,8 @@ import edu.tum.ase.project.model.Project;
 import edu.tum.ase.project.model.SourceFile;
 import edu.tum.ase.project.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.OAuth2RestOperations;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,14 +14,14 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-//@EnableResourceServer//this make the SecurityContext available of the Gateway, together with Bean OAuth2RestTemplate one can access the GitLab Api
+@EnableResourceServer //this make the SecurityContext available of the Gateway, together with Bean OAuth2RestTemplate one can access the GitLab Api
 public class ProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
 
-    /*@Autowired
-    private OAuth2RestOperations restTemplate;*/
+    @Autowired
+    private OAuth2RestOperations restTemplate;
 
     public Project createProject(Project project) {
         return projectRepository.save(project);
@@ -51,14 +53,13 @@ public class ProjectService {
     //add a user to the project
     private final String endpoint = "https://gitlab.com/api/v4/users/?username=";
 
-    //public Project shareProject(String projectId, Set<String> userIds) {
     public Project shareProject(String projectId, String userId) {
         Project project = projectRepository
                 .findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
         // TODO: check against the gitlab api and only set user if he exists
         //replace the following by //project.setUserIds(restTemplate.getForObject(endpoint + "userId", Project[].class));
-        project.setUserIds(Collections.singleton(userId));
+        project.setUserId(userId);
         projectRepository.save(project);
         return project;
     }

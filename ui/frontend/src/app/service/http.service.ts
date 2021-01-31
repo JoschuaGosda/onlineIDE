@@ -94,8 +94,8 @@ export class HttpService {
   }*/
 
   //this is wrong but compilable, obviously sourceFileId or a projectId is needed as parameter in the Url and the user in the body --> something like above
-  shareProject(User: string): Observable<void> {
-    return this.http.post<void>(shareProjectUrl, User);
+  shareProject(projectId: string, User: string): Observable<Project> {
+    return this.http.post<Project>(shareProjectUrl + '/' + projectId, User);
   }
 
 

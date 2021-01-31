@@ -16,15 +16,6 @@ security:
 
 
 spring:
-  cloud:
-    gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
   application:
     name: gateway-service
 eureka:
@@ -60,8 +51,10 @@ zuul:
         service-id: darkmode-service
         strip-prefix: false
 
-proxy:
-  auth:
-    routes:
-      project-service: oauth2
+  proxy:
+    auth:
+      routes:
+        project-service: oauth2
+        stores: passthru
+        recommendations: none
 

@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,8 +40,8 @@ public class Project implements Serializable {
         return userIds;
     }
 
-    public void setUserIds(Set<String> userIds) {
-        this.userIds = userIds;
+    public void setUserId(String userId) {
+        this.userIds.add(userId);
     }
 
     public Project() {

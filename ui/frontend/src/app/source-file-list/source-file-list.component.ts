@@ -109,7 +109,7 @@ export class SourceFileListComponent implements OnInit {
       // response is empty if dialog was canceled
       (response: string) => {
         if (response && response.length > 0) {
-          this.shareProject(//sourceFileId...
+          this.shareProject(this.project.id,
             response);
         }
       }
@@ -148,8 +148,8 @@ export class SourceFileListComponent implements OnInit {
   }
 
   //sourceFileId also as parameter?
-  private shareProject(User: string) {
-    this.httpService.shareProject(User).subscribe(
+  private shareProject(ProjectId: string, User: string) {
+    this.httpService.shareProject(ProjectId, User).subscribe(
       response => {
         //
       }

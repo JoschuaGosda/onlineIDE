@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*", exposedHeaders = "If-Match") //introduced to prevent cors error
+//@CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*", exposedHeaders = "If-Match") //introduced to prevent cors error
 @RestController
 public class ProjectController {
 
@@ -48,7 +48,7 @@ public class ProjectController {
     
     //added to include userIds that project is shared with
     @PostMapping("/share-project/{id}")
-    public Project shareProject (@PathVariable("id") String sourceFileId, @RequestBody String userId){
-        return projectService.shareProject(sourceFileId, userId);
+    public Project shareProject (@PathVariable("id") String projectId, @RequestBody String userId){
+        return projectService.shareProject(projectId, userId);
     }
 }
