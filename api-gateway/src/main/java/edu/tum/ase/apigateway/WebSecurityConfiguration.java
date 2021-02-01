@@ -36,7 +36,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter  {
             .antMatchers("/project/**").authenticated();
     }
 
-
-
-
 }
