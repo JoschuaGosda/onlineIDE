@@ -1,11 +1,8 @@
 package edu.tum.ase.project.controller;
 
-import edu.tum.ase.project.model.Project;
 import edu.tum.ase.project.model.SourceFile;
-import edu.tum.ase.project.service.ProjectService;
 import edu.tum.ase.project.service.SourceFileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

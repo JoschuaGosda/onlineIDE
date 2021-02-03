@@ -25,11 +25,12 @@ import {SourceFileListComponent} from './source-file-list/source-file-list.compo
 import {DeleteDialogComponent} from './delete-dialog/delete-dialog.component';
 import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
+import {AuthGuard} from "./auth.guard";
 
 const routes: Route[] = [
-  {path: 'ui/projects', component: ProjectListComponent},
+  {path: 'ui/projects', component: ProjectListComponent, canActivate: [AuthGuard]},
   {path: 'ui/files', component: SourceFileListComponent},
-  {path: 'ui/editor', component: EditorComponent},
+  {path: 'ui/editor', component: EditorComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: '/ui/projects'}
 ]
 

@@ -7,10 +7,9 @@ import edu.tum.ase.project.service.SourceFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
-//@CrossOrigin(origins = "*", allowCredentials = "true", allowedHeaders = "*", exposedHeaders = "If-Match") //introduced to prevent cors error
+
 @RestController
 public class ProjectController {
 

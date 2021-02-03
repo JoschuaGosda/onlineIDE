@@ -45,15 +45,14 @@ zuul:
       path: "/compiler/**"
       service-id: compiler-service
       strip-prefix: false
-      darkmode-service:
+    darkmode-service:
         path: "/darkmode/**"
         service-id: darkmode-service
         strip-prefix: false
 
-  proxy:
-    auth:
-      routes:
-        project-service: oauth2
-        stores: passthru
-        recommendations: none
+proxy:
+  auth:
+    routes:
+      project-service: oauth2
+
 
