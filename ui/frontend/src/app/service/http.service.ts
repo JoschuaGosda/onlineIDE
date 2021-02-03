@@ -6,7 +6,7 @@ import {SourceFile} from "../sourceFile";
 import {CompilationResult} from "../compilationResult";
 import {SourceCode} from "../sourceCode";
 
-const allProjectsUrl = 'project';
+const allProjectsUrl = 'project/';
 const createProjectUrl = 'project/create-project';
 const deleteProjectUrl = 'project/delete-project';
 const allSourceFilesOfProjectUrl = 'project/read-project';
