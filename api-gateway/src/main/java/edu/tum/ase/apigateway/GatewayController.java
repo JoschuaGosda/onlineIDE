@@ -13,11 +13,4 @@ public class GatewayController {
     public String index() {
         return "forward:/ui/";
     }
-	
-    //everything at the root level should be now available under /ui the frontend
-   @GetMapping(path = "/{resourcePath}")
-    public String index(@PathVariable("resourcePath") String resourcePath) {
-    	System.out.println(resourcePath);
-        return "forward:/ui/" + resourcePath;
-    }
 }

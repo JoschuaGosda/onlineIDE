@@ -6,24 +6,24 @@ import {SourceFile} from "../sourceFile";
 import {CompilationResult} from "../compilationResult";
 import {SourceCode} from "../sourceCode";
 
-const allProjectsUrl = 'project/';
-const createProjectUrl = 'project/create-project';
-const deleteProjectUrl = 'project/delete-project';
-const allSourceFilesOfProjectUrl = 'project/read-project';
-const updateProjectNameUrl = 'project/update-project-name';
+const allProjectsUrl = '/project/';
+const createProjectUrl = '/project/create-project';
+const deleteProjectUrl = '/project/delete-project';
+const allSourceFilesOfProjectUrl = '/project/read-project';
+const updateProjectNameUrl = '/project/update-project-name';
 
-const allSourceFilesUrl = 'project/all-source-files';
-const createSourceFileUrl = 'project/create-source-file';
-const deleteSourceFileUrl = 'project/delete-source-file';
-const updateSourceFileNameUrl = 'project/update-source-file-name';
-const updateSourceFileCodeUrl = 'project/update-source-file-code';
+const allSourceFilesUrl = '/project/all-source-files';
+const createSourceFileUrl = '/project/create-source-file';
+const deleteSourceFileUrl = '/project/delete-source-file';
+const updateSourceFileNameUrl = '/project/update-source-file-name';
+const updateSourceFileCodeUrl = '/project/update-source-file-code';
 
-const shareProjectUrl = 'project/share-project';
+const shareProjectUrl = '/project/share-project';
 
 
-const compileUrl = 'compiler/compile';
+const compileUrl = '/compiler/compile';
 
-const darkModeStatusUrl = 'darkmode/dark-mode';
+const darkModeStatusUrl = '/darkmode/dark-mode';
 
 /*
   Service for interacting with the backend REST API.

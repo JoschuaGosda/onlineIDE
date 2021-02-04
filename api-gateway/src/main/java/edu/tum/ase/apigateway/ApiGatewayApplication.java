@@ -39,15 +39,4 @@ public class ApiGatewayApplication {
     public Principal user() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
-
-    /*@Bean
-    public WebMvcConfigurer configurer(){
-        return new WebMvcConfigurer(){
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/*")
-                        .allowedOrigins("*");
-            }
-        };
-    }*/
 }
