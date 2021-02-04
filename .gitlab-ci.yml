@@ -19,7 +19,8 @@ build:
     stage: build
     script:
         - 'apt-get update'
-        - 'apt-get -yq install nodejs npm'
+        - 'curl -sL https://deb.nodesource.com/setup_14.x | bash - apt-get install -y nodejs'
+        - 'apt-get -yq install npm'
         - 'npm install --global @angular/cli'
         - 'mvn clean compile'
     
