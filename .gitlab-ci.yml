@@ -27,6 +27,9 @@ build:
 test:
     stage: test
     script:
+        - 'curl -sL https://deb.nodesource.com/setup_14.x | bash'
+        - 'apt-get install -y nodejs'
+        - 'npm install --global @angular/cli'
         - 'apt-get -yq update'
         - 'apt-get -yq install gcc'
         - 'mvn test'
@@ -41,6 +44,9 @@ test:
 package:
     stage: package
     script:
+        - 'curl -sL https://deb.nodesource.com/setup_14.x | bash'
+        - 'apt-get install -y nodejs'
+        - 'npm install --global @angular/cli'
         - 'mvn package -DskipTests=true'
     artifacts:
         paths:
