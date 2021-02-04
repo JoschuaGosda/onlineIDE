@@ -1,26 +1,50 @@
 image: maven:3.6.3-jdk-11
+
+variables:
+    MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+    MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+
+cache:
+    paths:
+        - .m2/repository
+
 stages:
     - build
     - test
     - package
-
-default:
-  before_script:
-    - cd compiler
-    - apt-get -yq update
-    - apt-get -yq install gcc
+    - publish
+    - deploy
 
 build:
     stage: build
     script:
-        - 'mvn compile'
+        - 'mvn clean compile'
     
 test:
     stage: test
     script:
+        - 'apt-get -yq update'
+        - 'apt-get -yq install gcc'
         - 'mvn test'
     
 package:
     stage: package
     script:
-        - 'mvn package'
+        - 'mvn package -DskipTests=true'
+    artifacts:
+        paths:
+            - /*/target/*.jar
+            
+publish:
+    stage: publish
+    image: docker:stable
+    services:
+        - docker:18-dind
+    script:
+        - apk add --no-cache py3-pip python3-dev libffi-dev openssl-dev curl gcc libc-dev make && pip3 install docker-compose
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker-compose build --pull
+        - docker-compose push
+    variables:
+        DOCKER_DRIVER: overlay2
+        DOCKER_HOST: tcp://docker:2375

@@ -12,8 +12,8 @@ security:
       userInfoUri: https://gitlab.lrz.de/api/v4/user
 
 spring:
-  profiles:
-    active: "dev"
+#  profiles:
+#    active: "dev"
   datasource:
     url: "jdbc:postgresql://localhost:5432/my_db"
     username: "admin"
