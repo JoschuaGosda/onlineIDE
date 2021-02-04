@@ -11,7 +11,6 @@ import {async} from "rxjs";
 })
 export class AppComponent {
   title = 'frontend';
-  constructor() {
-
+  constructor(public authService: AuthService) {
   }
 }
