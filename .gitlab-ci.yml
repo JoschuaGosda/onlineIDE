@@ -50,7 +50,7 @@ package:
         - 'mvn package -DskipTests=true'
     artifacts:
         paths:
-            - */target/*.jar
+            - "*/target/*.jar"
             
 publish:
     stage: publish
