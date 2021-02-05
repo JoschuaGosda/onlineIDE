@@ -6,7 +6,9 @@ Originally we were a group of five, but unfortunately we couldn't reach Oksana W
 
 #### Joschua Gosda
 
-- responsible for authentication/authorization, microservices architecture and implemented the dark-mode service for the dark mode toggle button
+- responsible for authentication/authorization
+- worked on the microservices architecture and patterns, including e.g. eureka and zuul
+- 
 - he used only his full name to commit
 
 #### Felix Gust
@@ -17,7 +19,7 @@ Originally we were a group of five, but unfortunately we couldn't reach Oksana W
 #### Tobias Humig
 
 - responsible for continuous integration & deployment
-- helped with the microservices architecture
+- helped with the microservices architecture and patterns
 - he used his full name to commit or "HobbyProgrammer"
 
 #### Helena Klause
