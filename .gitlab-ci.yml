@@ -51,6 +51,9 @@ package:
     artifacts:
         paths:
             - "*/target/*.jar"
+    only:
+        refs:
+            - master
             
 publish:
     stage: publish
@@ -65,6 +68,9 @@ publish:
     variables:
         DOCKER_DRIVER: overlay2
         DOCKER_HOST: tcp://docker:2375
+    only:
+        refs:
+            - master
         
 deploy:
     stage: deploy
@@ -80,6 +86,6 @@ deploy:
         - ssh -o "StrictHostKeyChecking=no" $SSH_HOST "sudo docker-compose -f docker-compose.prod.yml pull && sudo docker-compose -f docker-compose.prod.yml up --force-recreate -d"
     variables:
         SSH_HOST: humig@35.232.224.68
-#    only:
-#        refs:
-#            - master
+    only:
+        refs:
+            - master
