@@ -67,4 +67,4 @@ services:
         environment:
             - EUREKA_SERVER=http://discovery-service:8761/eureka
         ports:
-            - 8000:8000
+            - 80:8000
