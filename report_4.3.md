@@ -11,7 +11,7 @@ Originally we were a group of five, but unfortunately we couldn't reach Oksana W
 
 #### Felix Gust
 
-- responsible for source code editor
+- responsible for source code editor (ui service)
 - he used only his full name to commit
 
 #### Tobias Humig
