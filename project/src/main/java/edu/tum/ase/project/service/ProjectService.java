@@ -9,7 +9,9 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
@@ -30,17 +32,19 @@ public class ProjectService {
     @Autowired
     private OAuth2RestOperations restTemplate;
 
-
-
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Project createProject(Project project) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = principal.toString();
         //project.setUserId(username);
         project.setUserId("aabc");
+        System.out.println("method createProject was run");
         return projectRepository.save(project);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Project findById(String projectId) {
+        System.out.println("method findbyId was run");
         return projectRepository
                 .findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
@@ -51,27 +55,36 @@ public class ProjectService {
     // Links die etwas helfen: https://www.baeldung.com/spring-security-prefilter-postfilter
     // https://www.baeldung.com/spring-security-expressions
     // https://www.baeldung.com/spring-security-create-new-custom-security-expression
+    // https://www.baeldung.com/spring-expression-language
+
+
     @PostFilter("filterObject.isAllowed(principal)==true")
     public List<Project> getProjects() {
+        System.out.println("method getProjects was run");
         return projectRepository.findAll();
     }
 
+    @PreAuthorize("#project.isAllowed(principal)==true")
     public void deleteProject(Project project) {
+        System.out.println("method deleteProject was run");
         projectRepository.delete(project);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Project updateProjectName(String projectId, String name) {
         Project project = projectRepository
                 .findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
         project.setName(name);
         projectRepository.save(project);
+        System.out.println("method updateProjectName was run");
         return project;
     }
 
     //add a user to the project
     private final String endpoint = "https://gitlab.lrz.de/api/v4/users/?username=";
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Project shareProject(String projectId, String userId) {
         Project project = projectRepository
                 .findById(projectId)

@@ -5,6 +5,8 @@ import edu.tum.ase.project.model.SourceFile;
 import edu.tum.ase.project.service.ProjectService;
 import edu.tum.ase.project.service.SourceFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
