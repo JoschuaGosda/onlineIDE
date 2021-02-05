@@ -1,6 +1,6 @@
 ## Final Report (Group 4.3)
 
-We assigned every team member to some requirements (see below). During the semester we had regular meetings to discuss our progress and debug the code. We have all worked together to fix our bus. We also tried to participate in all the project tutorial sessions.
+We assigned every team member to some requirements (see below). During the semester we had regular meetings to discuss our progress and debug the code. We have all worked together to fix our bugs. We also tried to participate in all the project tutorial sessions.
 
 Originally we were a group of five, but unfortunately we couldn't reach Oksana Wannick anymore at some point. Claudius then told us that she doesn't want to continue the project.
 
@@ -22,7 +22,8 @@ Originally we were a group of five, but unfortunately we couldn't reach Oksana W
 
 #### Helena Klause
 
-- responsible for compilation, project file management and implemented the code for the microcontroller to enable the dark mode toggle button
+- responsible for compilation and project file management
+- implemented the code for the microcontroller to enable the dark mode toggle button
 - she used her full name to commit or "marchantia"
 
 
