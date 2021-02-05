@@ -31,7 +31,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter  {
             .authorizeRequests()
             .antMatchers("/authenticated").permitAll()
             .antMatchers("/compiler/**").authenticated()
-            .antMatchers("/darkmode/**").authenticated()
+            //.antMatchers("/darkmode/**").authenticated()
             .antMatchers("/project/**").authenticated();
     }
 
