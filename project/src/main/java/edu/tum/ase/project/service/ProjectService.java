@@ -36,8 +36,8 @@ public class ProjectService {
     public Project createProject(Project project) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = principal.toString();
-        //project.setUserId(username);
-        project.setUserId("aabc");
+        project.setUserId(username);
+        //project.setUserId("aabc");
         System.out.println("method createProject was run");
         return projectRepository.save(project);
     }
@@ -105,7 +105,6 @@ public class ProjectService {
 
             //convert Object to JSONObject
             JSONObject jsonObject = (JSONObject) object;
-
 
             //Read the string
             String username = (String) jsonObject.get("username");
