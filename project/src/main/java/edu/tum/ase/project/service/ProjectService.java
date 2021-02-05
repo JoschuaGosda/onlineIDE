@@ -1,11 +1,19 @@
 package edu.tum.ase.project.service;
 
+
 import edu.tum.ase.project.model.Project;
 import edu.tum.ase.project.repository.ProjectRepository;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
+
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +30,13 @@ public class ProjectService {
     @Autowired
     private OAuth2RestOperations restTemplate;
 
+
+
     public Project createProject(Project project) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = principal.toString();
+        //project.setUserId(username);
+        project.setUserId("aabc");
         return projectRepository.save(project);
     }
 
@@ -32,6 +46,12 @@ public class ProjectService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
     }
 
+    //Vorgehen bis jetzt mit Trial and Error - evtl. .toString() auf security object anwenden ->principal bzw authentication
+    // über localhost:8000/user können Authentication Details angesehen werden
+    // Links die etwas helfen: https://www.baeldung.com/spring-security-prefilter-postfilter
+    // https://www.baeldung.com/spring-security-expressions
+    // https://www.baeldung.com/spring-security-create-new-custom-security-expression
+    @PostFilter("filterObject.isAllowed(principal)==true")
     public List<Project> getProjects() {
         return projectRepository.findAll();
     }
@@ -50,15 +70,46 @@ public class ProjectService {
     }
 
     //add a user to the project
-    private final String endpoint = "https://gitlab.com/api/v4/users/?username=";
+    private final String endpoint = "https://gitlab.lrz.de/api/v4/users/?username=";
 
     public Project shareProject(String projectId, String userId) {
         Project project = projectRepository
                 .findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
-        // TODO: check against the gitlab api and only set user if he exists
-        //replace the following by //project.setUserIds(restTemplate.getForObject(endpoint + "userId", Project[].class));
-        project.setUserId(userId);
+
+        System.out.println("token is:");
+        System.out.println(restTemplate.getAccessToken());
+        System.out.println("answer to gitlab api is:");
+        System.out.println("request to: " + endpoint + userId);
+        System.out.println(restTemplate.getForObject(endpoint + userId, String.class));
+
+        String JSONresponse;
+        JSONresponse = restTemplate.getForObject(endpoint + userId, String.class);
+        /*JSONParser parser = new JSONParser();
+        try{
+            Object object = parser
+                    .parse(JSONresponse);
+
+            //convert Object to JSONObject
+            JSONObject jsonObject = (JSONObject) object;
+
+
+            //Read the string
+            String username = (String) jsonObject.get("username");
+            System.out.println(username);
+            if(username.equals(userId)) {
+                project.setUserId(userId);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }*/
+        //System.out.println("reponselength is:" + JSONresponse.length());
+
+        //if reponse is longer than 2 characters the user exists and should be added as valid user, otherwise json repsonse is empty
+        if(JSONresponse.length() > 2) {
+            project.setUserId(userId);
+        }
         projectRepository.save(project);
         return project;
     }
