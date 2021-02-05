@@ -9,20 +9,20 @@ Originally we were a group of five but unfortunately we couldn't reach Oksana Wa
 - responsible for authentication/authorization, microservices architecture and implemented the dark-mode service for the dark mode toggle button
 - he used only his full name to commit
 
-####Felix Gust
+#### Felix Gust
 
 - responsible for source code editor
 - he used only his full name to commit
 
-####Tobias Humig
+#### Tobias Humig
 
 - responsible for continuous integration & deployment and microservices architecture
 - he used his full name to commit or "HobbyProgrammer"
 
-####Helena Klause
+#### Helena Klause
 
 - responsible for compilation, project file management and implemented the code for the microcontroller to enable the dark mode toggle button
 - she used her full name to commit or "marchantia"
 
 
-This is the URL to our OnlineIDE (Google VM IP address or custom domain if available)
+This is the URL to our OnlineIDE http://35.232.224.68.
