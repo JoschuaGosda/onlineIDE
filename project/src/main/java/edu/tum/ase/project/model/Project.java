@@ -1,6 +1,7 @@
 package edu.tum.ase.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.Session;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -48,6 +49,7 @@ public class Project implements Serializable {
     }
 
     public boolean isAllowed (String user) {
+        System.out.println("isAllowed() was run");
         if (this.userIds.contains(user)) {
             return true;
         } else {

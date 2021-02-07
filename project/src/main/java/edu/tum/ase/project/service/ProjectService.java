@@ -42,12 +42,14 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("@projectRepository.findById(#projectId).get().isAllowed(principal)==true")
     public Project findById(String projectId) {
-        System.out.println("method findbyId was run");
-        return projectRepository
+        Project project = projectRepository
                 .findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + projectId));
+        System.out.println("method findbyId was run");
+        return project;
+
     }
 
     //Vorgehen bis jetzt mit Trial and Error - evtl. .toString() auf security object anwenden ->principal bzw authentication
@@ -56,7 +58,6 @@ public class ProjectService {
     // https://www.baeldung.com/spring-security-expressions
     // https://www.baeldung.com/spring-security-create-new-custom-security-expression
     // https://www.baeldung.com/spring-expression-language
-
 
     @PostFilter("filterObject.isAllowed(principal)==true")
     public List<Project> getProjects() {
@@ -70,7 +71,7 @@ public class ProjectService {
         projectRepository.delete(project);
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("@projectRepository.findById(#projectId).get().isAllowed(principal)==true")
     public Project updateProjectName(String projectId, String name) {
         Project project = projectRepository
                 .findById(projectId)
@@ -81,10 +82,11 @@ public class ProjectService {
         return project;
     }
 
+
     //add a user to the project
     private final String endpoint = "https://gitlab.lrz.de/api/v4/users/?username=";
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("@projectRepository.findById(#projectId).get().isAllowed(principal)==true")
     public Project shareProject(String projectId, String userId) {
         Project project = projectRepository
                 .findById(projectId)
@@ -98,25 +100,6 @@ public class ProjectService {
 
         String JSONresponse;
         JSONresponse = restTemplate.getForObject(endpoint + userId, String.class);
-        /*JSONParser parser = new JSONParser();
-        try{
-            Object object = parser
-                    .parse(JSONresponse);
-
-            //convert Object to JSONObject
-            JSONObject jsonObject = (JSONObject) object;
-
-            //Read the string
-            String username = (String) jsonObject.get("username");
-            System.out.println(username);
-            if(username.equals(userId)) {
-                project.setUserId(userId);
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }*/
-        //System.out.println("reponselength is:" + JSONresponse.length());
 
         //if reponse is longer than 2 characters the user exists and should be added as valid user, otherwise json repsonse is empty
         if(JSONresponse.length() > 2) {
