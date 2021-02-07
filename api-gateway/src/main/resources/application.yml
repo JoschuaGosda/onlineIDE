@@ -46,9 +46,9 @@ zuul:
       service-id: compiler-service
       strip-prefix: false
     darkmode-service:
-        path: "/darkmode/**"
-        service-id: darkmode-service
-        strip-prefix: false
+      path: "/darkmode/**"
+      service-id: darkmode-service
+      strip-prefix: false
 
 proxy:
   auth:

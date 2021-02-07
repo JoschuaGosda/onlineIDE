@@ -8,7 +8,6 @@ Originally we were a group of five, but unfortunately we couldn't reach Oksana W
 
 - responsible for authentication/authorization
 - worked on the microservices architecture and patterns, including e.g. eureka and zuul
-- 
 - he used only his full name to commit
 
 #### Felix Gust

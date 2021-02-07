@@ -1,6 +1,7 @@
 package edu.tum.ase.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.Session;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -30,7 +31,7 @@ public class Project implements Serializable {
     @OnDelete(action= OnDeleteAction.CASCADE)
     private List<SourceFile> sourceFileList;
 
-    //extend the project model to also contain users id that can access the project
+    //extend the project model to also contain users ids that can access the project
     @ElementCollection
     @CollectionTable(name= "project_project_users", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "userIds")
@@ -45,6 +46,15 @@ public class Project implements Serializable {
     }
 
     public Project() {
+    }
+
+    public boolean isAllowed (String user) {
+        System.out.println("isAllowed() was run");
+        if (this.userIds.contains(user)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Project(String name) {
@@ -70,4 +80,5 @@ public class Project implements Serializable {
     public void setSourceFileList(List<SourceFile> sourceFileList) {
         this.sourceFileList = sourceFileList;
     }
+
 }

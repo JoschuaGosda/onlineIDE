@@ -19,25 +19,34 @@ export class EditorComponent implements OnInit, OnDestroy {
   private themUpdateSubscription: Subscription;
 
   constructor(private httpService: HttpService, private router: Router) {
-    // passed by SourceFileListComponent via router.navigateByUrl
-    this.sourceFile = this.router.getCurrentNavigation().extras.state.sourceFile;
+    // passed by SourceFileListComponent via router.navigateByUrl,
+    // undefined if page is accessed directly / reloaded
+    let passedState = this.router.getCurrentNavigation().extras.state;
+    if (!passedState) {
+      router.navigateByUrl('ui/projects');
+    }
+    else {
+      this.sourceFile = passedState.sourceFile;
 
-    this.compilationResult = new CompilationResult();
-    this.compilationResult.stderr = '';
-    this.compilationResult.stdout = '';
-    this.compilationResult.compilable = false;
+      this.compilationResult = new CompilationResult();
+      this.compilationResult.stderr = '';
+      this.compilationResult.stdout = '';
+      this.compilationResult.compilable = false;
 
-    // default values in case theme or language cannot be set later on
-    this.editorOptions = {theme: 'vs-dark', language: 'c'};
-    this.updateLanguage();
-    this.updateTheme();
-    this.periodicallyUpdateTheme(1000);
+      // default values in case theme or language cannot be set later on
+      this.editorOptions = {theme: 'vs-dark', language: 'c'};
+      this.updateLanguage();
+      this.updateTheme();
+      this.periodicallyUpdateTheme(1000);
+    }
   }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    this.themUpdateSubscription.unsubscribe();
+    if (this.themUpdateSubscription) {
+      this.themUpdateSubscription.unsubscribe();
+    }
   }
 
   public saveSourceFile(): void {
