@@ -13,7 +13,7 @@ public class SourceFile {
     @Column(name = "source_file_id")
     private String id;
 
-    @Column(name = "file_name", nullable = false, unique = true)
+    @Column(name = "file_name", nullable = false)
     private String name;
 
     @Column(columnDefinition="TEXT", name = "source_code")
