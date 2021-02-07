@@ -22,14 +22,27 @@ export class SourceFileListComponent implements OnInit {
   constructor(private httpService: HttpService, private dialog: MatDialog,
               private router: Router) {
 
-    // passed by ProjectListComponent via router.navigateByUrl
-    this.project = this.router.getCurrentNavigation().extras.state.project;
+    // Initialize just to be safe
+    this.project = new Project();
+    this.project.name = "";
+    this.project.id = "";
+    this.project.users = [];
+    this.sourceFiles = [];
 
-    this.httpService.getAllSourceFilesOfProject(this.project.id).subscribe(
-      response => {
-        this.sourceFiles = response;
-      }
-    );
+    // passed by ProjectListComponent via router.navigateByUrl,
+    // undefined if page is accessed directly / reloaded
+    let passedState = this.router.getCurrentNavigation().extras.state;
+    if (!passedState) {
+      router.navigateByUrl('ui/projects');
+    }
+    else {
+      this.project = passedState.project;
+      this.httpService.getAllSourceFilesOfProject(this.project.id).subscribe(
+        response => {
+          this.sourceFiles = response;
+        }
+      );
+    }
   }
 
   ngOnInit(): void {}

@@ -26,12 +26,14 @@ import {DeleteDialogComponent} from './delete-dialog/delete-dialog.component';
 import {RenameDialogComponent} from './rename-dialog/rename-dialog.component';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 import {AuthGuard} from "./auth.guard";
+import {LoginComponent} from './login/login.component';
 
 const routes: Route[] = [
   {path: 'ui/projects', component: ProjectListComponent, canActivate: [AuthGuard]},
   {path: 'ui/files', component: SourceFileListComponent},
   {path: 'ui/editor', component: EditorComponent, canActivate: [AuthGuard]},
-  {path: '**', redirectTo: '/ui/projects'}
+  {path: 'ui/login', component: LoginComponent},
+  {path: '**', redirectTo: '/ui/login'}
 ]
 
 @NgModule({
@@ -43,7 +45,8 @@ const routes: Route[] = [
     SourceFileListComponent,
     DeleteDialogComponent,
     RenameDialogComponent,
-    ShareDialogComponent
+    ShareDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
