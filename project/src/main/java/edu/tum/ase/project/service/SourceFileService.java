@@ -16,33 +16,32 @@ public class SourceFileService {
     @Autowired
     private SourceFileRepository sourceFileRepository;
 
-    @PreAuthorize("hasRole('ROLE_USER')")
     public SourceFile createFile(SourceFile sourceFile){
         return sourceFileRepository.save(sourceFile);
     }
 
-    @PreAuthorize("@sourcFileRepository.findById(#sourceFileId).getProject().isAllowed(principal)==true")
+
     public SourceFile findById(String sourceFileId) {
         return sourceFileRepository
                 .findById(sourceFileId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid projectId:" + sourceFileId));
     }
-    @PreAuthorize("#project.isAllowed(principal)==true")
+
     public List<SourceFile> getSourceFiles(Project project){
         return sourceFileRepository.findByProject(project);
     }
 
-    @PostFilter("filterObject.getProject().isAllowed(principal)==true")
+
     public List<SourceFile> getAll(){
         return sourceFileRepository.findAll();
     }
 
-    @PreAuthorize("#sourceFile.getProject().isAllowed(principal)==true")
+
     public void deleteFile(SourceFile sourceFile) {
         sourceFileRepository.delete(sourceFile);
     }
 
-    @PreAuthorize("@sourcFileRepository.findById(#sourceFileId).getProject().isAllowed(principal)==true")
+
     public SourceFile updateSourceFileName(String sourceFileId, String name) {
         SourceFile sourceFile = sourceFileRepository
                 .findById(sourceFileId)
@@ -52,7 +51,7 @@ public class SourceFileService {
         return sourceFile;
     }
 
-    @PreAuthorize("@sourcFileRepository.findById(#sourceFileId).getProject().isAllowed(principal)==true")
+
     public SourceFile updateSourceFileCode(String sourceFileId, String sourceCode) {
         SourceFile sourceFile = sourceFileRepository
                 .findById(sourceFileId)
