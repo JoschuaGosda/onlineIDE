@@ -15,8 +15,8 @@ security:
 
 
 spring:
-  profiles:
-    active: "dev"
+#  profiles:
+#    active: "dev"
   application:
     name: gateway-service
 eureka:
