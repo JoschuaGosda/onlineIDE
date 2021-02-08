@@ -11,4 +11,6 @@ This is tested on a fresh Ubuntu 18.04 installation with maven 3.6.0, openjdk-11
 2. In the project root directory:
 	1. `mvn package -DskipTests=true`
 	2. `sudo docker-compose -f docker-compose.dev.yml up --build`
+3. Wait a few minutes until everything settles.
+4. Access the Online IDE at http://localhost:8000
 
